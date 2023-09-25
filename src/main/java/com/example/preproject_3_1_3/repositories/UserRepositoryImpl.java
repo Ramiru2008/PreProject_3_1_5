@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 @Repository
 public class UserRepositoryImpl implements UserRepository {
+
     @PersistenceContext
     private EntityManager em;
 
@@ -47,4 +48,6 @@ public class UserRepositoryImpl implements UserRepository {
                 .getResultList()
                 .stream().findFirst().orElse(null);
     }
+}
+
 }
