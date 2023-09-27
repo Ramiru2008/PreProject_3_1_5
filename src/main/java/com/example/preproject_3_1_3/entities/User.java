@@ -9,33 +9,33 @@ import java.util.Set;
 
 
 @Entity
-    @Table(name = "users")
-    public class User implements UserDetails {
-        @Id
-        @Column(name = "id")
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
-        @Column(name = "username")
-        private String username;
+@Table(name = "users")
+public class User implements UserDetails {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "username")
+    private String username;
 
-        @Column(name = "surname")
-        private String surname;
-        @Column(name = "password")
-        private String password;
-        @ManyToMany(fetch = FetchType.EAGER)
-        @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id"))
-        private Set<Role> roles;
+    @Column(name = "surname")
+    private String surname;
+    @Column(name = "password")
+    private String password;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
-
-        public User() {
-
-        }
 
     public User(String username, String surname, String password) {
         this.username = username;
         this.surname = surname;
         this.password = password;
+    }
+
+    public User() {
+
     }
 
     public Long getId() {

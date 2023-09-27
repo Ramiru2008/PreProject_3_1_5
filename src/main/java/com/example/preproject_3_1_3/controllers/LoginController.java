@@ -1,18 +1,19 @@
 package com.example.preproject_3_1_3.controllers;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 
-@RestController
+@Controller
 public class LoginController {
     @GetMapping("/login")
     public String loginPage() {
-        return "login/login";
+        return "login";
     }
+
     @GetMapping("/authenticated")
     public String pageForAuthenticatedUsers(Principal principal) {
-        return "secured part of web service: " + principal.getName();
+        return "user" + principal.getName();
     }
 }

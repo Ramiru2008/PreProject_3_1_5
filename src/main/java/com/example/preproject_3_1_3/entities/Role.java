@@ -20,6 +20,7 @@ public class Role implements GrantedAuthority {
     public Role() {
 
     }
+
     public Role(Long id) {
         this.id = id;
     }
@@ -28,6 +29,7 @@ public class Role implements GrantedAuthority {
         this.id = id;
         this.name = name;
     }
+
 
     public Long getId() {
         return id;
