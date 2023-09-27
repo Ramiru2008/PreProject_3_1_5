@@ -30,7 +30,7 @@ public class AdminController {
     }
 
     @GetMapping("/new")
-    public String registration(ModelMap model) {
+    public String registration(Model model) {
         User user = new User();
         Collection<Role> roles = roleService.getAllRoles();
         model.addAttribute("user", user);
@@ -38,9 +38,13 @@ public class AdminController {
         return "new";
     }
 
-    @PostMapping("/new")
+    @PostMapping("/users")
     public String create(@ModelAttribute("user") User user) {
+        if(userService.findByUsername(user.getUsername()) == null) {
         userService.add(user);
+        } else {
+            return "redirect: /admin/login";
+        }
         return "redirect:/admin/users";
     }
 
