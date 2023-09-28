@@ -5,9 +5,8 @@ import com.example.preproject_3_1_3.repositories.RoleRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 @Transactional(readOnly = true)
@@ -20,18 +19,17 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public List<Role> getAllRoles() {
-        return roleRepository.findAll();
+        return roleRepository.getAllRoles();
     }
 
     @Override
     @Transactional
     public void add(Role role) {
-        roleRepository.save(role);
+        roleRepository.add(role);
     }
 
     @Override
     public Role getRoleById(Long id) {
-        Optional<Role> getRole = roleRepository.findById(id);
-        return getRole.orElse(null);
+        return roleRepository.getRoleById(id);
     }
 }
