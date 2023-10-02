@@ -40,8 +40,8 @@ public class AdminController {
 
     @PostMapping("/users")
     public String create(@ModelAttribute("user") User user) {
-        if(userService.findByUsername(user.getUsername()) == null) {
-        userService.add(user);
+        if (userService.findByUsername(user.getUsername()) == null) {
+            userService.add(user);
         } else {
             return "redirect: /admin/login";
         }

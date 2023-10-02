@@ -13,9 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
 
@@ -37,12 +39,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public User getUserById(Long id) {
-        return userRepository.getUserById(id);
+        Optional<User> getUser = Optional.ofNullable(userRepository.getUserById(id));
+
+        return getUser.orElse(null);
     }
 
     @Override
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+        Optional<User> getUsername = Optional.ofNullable(userRepository.findByUsername(username));
+        return getUsername.orElse(null);
     }
 
     @Override
