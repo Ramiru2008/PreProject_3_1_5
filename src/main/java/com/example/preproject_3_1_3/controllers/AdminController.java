@@ -2,6 +2,7 @@ package com.example.preproject_3_1_3.controllers;
 
 import com.example.preproject_3_1_3.entities.Role;
 import com.example.preproject_3_1_3.entities.User;
+import com.example.preproject_3_1_3.entities.UserData;
 import com.example.preproject_3_1_3.services.RoleService;
 import com.example.preproject_3_1_3.services.UserService;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Controller
@@ -39,8 +42,14 @@ public class AdminController {
     }
 
     @PostMapping("/users")
-    public String create(@ModelAttribute("user") User user) {
-        if (userService.findByUsername(user.getUsername()) == null) {
+    public String create(@ModelAttribute("user") UserData userData) {
+        if (userService.findByUsername(userData.getUsername()) == null) {
+            User user = new User(
+                    userData.getUsername(),
+                    userData.getSurname(),
+                    userData.getPassword(),
+                    Set.of(roleService.getRoleById(userData.getRole()))
+            );
             userService.add(user);
         } else {
             return "redirect: /admin/login";
@@ -61,8 +70,17 @@ public class AdminController {
     }
 
     @PatchMapping("/{id}")
-    public String editUser(@ModelAttribute("user") User user) {
-        userService.edit(user, new Role());
+    public String editUser(@ModelAttribute("user") UserData userData) {
+        User user = userService.findByUsername(userData.getUsername());
+        Role role = roleService.getRoleById(userData.getRole());
+
+        Set<Role> setRoles = new HashSet<>();
+        setRoles.add(role);
+        user.setRoles(setRoles);
+        user.setPassword(userData.getPassword());
+        user.setSurname(userData.getSurname());
+        user.setUsername(userData.getUsername());
+        userService.edit(user, role);
         return "redirect:/admin/users";
     }
 

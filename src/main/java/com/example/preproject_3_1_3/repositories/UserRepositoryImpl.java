@@ -5,6 +5,7 @@ import com.example.preproject_3_1_3.entities.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
@@ -16,10 +17,14 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User findByUsername(String username) {
-        return em
-                .createQuery("Select u from User u left join fetch u.roles where u.username=:username", User.class)
-                .setParameter("username", username)
-                .getSingleResult();
+        try {
+            return em
+                    .createQuery("Select u from User u left join fetch u.roles where u.username=:username", User.class)
+                    .setParameter("username", username)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     @Override

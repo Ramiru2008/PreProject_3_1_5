@@ -30,14 +30,15 @@ public class User implements UserDetails {
     private Set<Role> roles = new HashSet<>();
 
 
-    public User(String username, String surname, String password) {
+    public User() {
+
+    }
+
+    public User(String username, String surname, String password, Set<Role> roles) {
         this.username = username;
         this.surname = surname;
         this.password = password;
-    }
-
-    public User() {
-
+        this.roles = roles;
     }
 
     public Long getId() {

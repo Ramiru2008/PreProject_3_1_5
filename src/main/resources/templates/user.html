@@ -21,7 +21,7 @@
     </tr>
     </tbody>
 </table>
-<form th:method="DELETE" th:action="@{/admin/{id}(id=${user.id})}">
+<form th:method="DELETE" th:action="@{/admin/users/{id}(id=${user.id})}">
     <input type="submit" value="Delete User" />
 </form>
 <input align="right" type = "button" value = "Logout"
