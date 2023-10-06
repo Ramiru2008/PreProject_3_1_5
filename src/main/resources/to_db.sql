@@ -3,7 +3,7 @@ CREATE TABLE roles (
                        name VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE users (
+CREATE TABLE users  (
                        id INT AUTO_INCREMENT PRIMARY KEY,
                        username VARCHAR(255) NOT NULL,
                        surname VARCHAR(255) NOT NULL,
