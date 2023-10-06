@@ -1,6 +1,6 @@
-package com.example.preproject_3_1_3.entities;
+package com.example.preproject_3_1_4.dto;
 
-public class UserData {
+public class UserDto {
     private Long id;
     private String username;
 
@@ -8,9 +8,9 @@ public class UserData {
     private String password;
     private Long roles;
 
-    public UserData() {}
+    public UserDto() {}
 
-    public UserData(String username, String surname, String password, Long roles) {
+    public UserDto(String username, String surname, String password, Long roles) {
         this.username = username;
         this.surname = surname;
         this.password = password;

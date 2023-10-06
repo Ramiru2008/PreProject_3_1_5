@@ -1,7 +1,7 @@
-package com.example.preproject_3_1_3.repositories;
+package com.example.preproject_3_1_4.repositories;
 
-import com.example.preproject_3_1_3.entities.Role;
-import com.example.preproject_3_1_3.entities.User;
+import com.example.preproject_3_1_4.entities.Role;
+import com.example.preproject_3_1_4.entities.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

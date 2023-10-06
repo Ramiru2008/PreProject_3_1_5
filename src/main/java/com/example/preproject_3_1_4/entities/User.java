@@ -1,4 +1,4 @@
-package com.example.preproject_3_1_3.entities;
+package com.example.preproject_3_1_4.entities;
 
 
 import org.springframework.security.core.GrantedAuthority;
@@ -24,7 +24,7 @@ public class User implements UserDetails {
     private String surname;
     @Column(name = "password")
     private String password;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
