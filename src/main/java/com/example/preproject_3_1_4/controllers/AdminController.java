@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -42,13 +44,16 @@ public class AdminController {
     }
 
     @PostMapping("/users")
-    public String create(@ModelAttribute("user") UserDto userDto) {
+    public String create(@ModelAttribute("user") UserDto userDto, @RequestParam("roles") List<Long> roleIds) {
+        Set<Role> roles = roleIds.stream()
+                .map(roleService::getRoleById)
+                .collect(Collectors.toSet());
         if (userService.findByUsername(userDto.getUsername()) == null) {
             User user = new User(
                     userDto.getUsername(),
                     userDto.getSurname(),
                     userDto.getPassword(),
-                    Set.of(roleService.getRoleById(userDto.getRole()))
+                    roles
             );
             userService.add(user);
         } else {
