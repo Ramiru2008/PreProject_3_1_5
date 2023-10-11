@@ -1,20 +1,25 @@
 package com.example.preproject_3_1_4.dto;
 
+
+import java.util.List;
+
 public class UserDto {
     private Long id;
     private String username;
 
     private String surname;
     private String password;
-    private Long roles;
+    private Long role;
+    private List<Long> roles;
 
-    public UserDto() {}
+    public UserDto() {
+    }
 
-    public UserDto(String username, String surname, String password, Long roles) {
+    public UserDto(String username, String surname, String password, Long role) {
         this.username = username;
         this.surname = surname;
         this.password = password;
-        this.roles = roles;
+        this.role = role;
     }
 
     public Long getId() {
@@ -44,17 +49,16 @@ public class UserDto {
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
 
     public Long getRole() {
-        return roles;
+        return role;
     }
 
-    public void setRoles(Long roles) {
-        this.roles = roles;
+    public void setRoles(Long role) {
+        this.role = role;
     }
-
-
 }

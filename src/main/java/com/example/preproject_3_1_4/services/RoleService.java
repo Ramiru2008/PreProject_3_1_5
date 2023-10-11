@@ -11,4 +11,5 @@ public interface RoleService {
     void add(Role role);
 
     Role getRoleById(Long id);
+
 }

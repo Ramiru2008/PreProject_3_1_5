@@ -26,4 +26,5 @@ public class RoleRepositoryImpl implements RoleRepository {
     public Role getRoleById(Long id) {
         return em.find(Role.class, id);
     }
+
 }
