@@ -1,6 +1,5 @@
 package com.example.preproject_3_1_4.repositories;
 
-import com.example.preproject_3_1_4.entities.Role;
 import com.example.preproject_3_1_4.entities.User;
 import org.springframework.stereotype.Repository;
 
@@ -46,7 +45,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void edit(User user, Role role) {
+    public void edit(User user) {
         em.merge(user);
     }
 

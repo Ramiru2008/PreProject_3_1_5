@@ -15,7 +15,8 @@ public interface UserRepository {
 
     void removeUserById(Long id);
 
-    void edit(User user, Role role);
+
+    void edit(User user);
 
     User getUserById(Long id);
 

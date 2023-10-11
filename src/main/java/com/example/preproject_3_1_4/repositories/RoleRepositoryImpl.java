@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
@@ -27,4 +29,10 @@ public class RoleRepositoryImpl implements RoleRepository {
         return em.find(Role.class, id);
     }
 
+    @Override
+    public List<Role> getRoleByIds(List<Long> roleIds) {
+        return em.createQuery("select r from Role r where r.id in ?1", Role.class)
+                .setParameter(1, roleIds)
+                .getResultList();
+    }
 }

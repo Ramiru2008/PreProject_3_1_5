@@ -45,15 +45,13 @@ public class AdminController {
 
     @PostMapping("/users")
     public String create(@ModelAttribute("user") UserDto userDto, @RequestParam("roles") List<Long> roleIds) {
-        Set<Role> roles = roleIds.stream()
-                .map(roleService::getRoleById)
-                .collect(Collectors.toSet());
+        List<Role> roles = roleService.getRoleByIds(userDto.getRoles());
         if (userService.findByUsername(userDto.getUsername()) == null) {
             User user = new User(
                     userDto.getUsername(),
                     userDto.getSurname(),
                     userDto.getPassword(),
-                    roles
+                    new HashSet<>(roles)
             );
             userService.add(user);
         } else {
@@ -77,15 +75,14 @@ public class AdminController {
     @PatchMapping("/{id}")
     public String editUser(@ModelAttribute("user") UserDto userDto) {
         User user = userService.findByUsername(userDto.getUsername());
-        Role role = roleService.getRoleById(userDto.getRole());
+        List<Role> roles = roleService.getRoleByIds(userDto.getRoles());
 
-        Set<Role> setRoles = new HashSet<>();
-        setRoles.add(role);
+        Set<Role> setRoles = new HashSet<>(roles);
         user.setRoles(setRoles);
         user.setPassword(userDto.getPassword());
         user.setSurname(userDto.getSurname());
         user.setUsername(userDto.getUsername());
-        userService.edit(user, role);
+        userService.edit(user);
         return "redirect:/admin/users";
     }
 

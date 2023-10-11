@@ -15,6 +15,14 @@ public class UserDto {
     public UserDto() {
     }
 
+    public UserDto(Long id, String username, String surname, String password, List<Long> roles) {
+        this.id = id;
+        this.username = username;
+        this.surname = surname;
+        this.password = password;
+        this.roles = roles;
+    }
+
     public UserDto(String username, String surname, String password, Long role) {
         this.username = username;
         this.surname = surname;
@@ -58,7 +66,14 @@ public class UserDto {
         return role;
     }
 
-    public void setRoles(Long role) {
+    public void setRole(Long role) {
         this.role = role;
     }
+    public List<Long> getRoles() {
+        return roles;
+    }
+    public void setRoles(List<Long> roles) {
+        this.roles = roles;
+    }
+
 }

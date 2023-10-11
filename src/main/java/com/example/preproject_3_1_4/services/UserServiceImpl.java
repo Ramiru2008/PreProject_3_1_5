@@ -64,9 +64,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     @Transactional
-    public void edit(User user, Role role) {
+    public void edit(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.edit(user, role);
+        userRepository.edit(user);
     }
 
     @Override
