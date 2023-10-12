@@ -14,7 +14,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 
 @Controller
@@ -44,7 +43,7 @@ public class AdminController {
     }
 
     @PostMapping("/users")
-    public String create(@ModelAttribute("user") UserDto userDto, @RequestParam("roles") List<Long> roleIds) {
+    public String create(@ModelAttribute("user") UserDto userDto) {
         List<Role> roles = roleService.getRoleByIds(userDto.getRoles());
         if (userService.findByUsername(userDto.getUsername()) == null) {
             User user = new User(

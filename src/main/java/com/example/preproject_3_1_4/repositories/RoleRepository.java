@@ -11,6 +11,7 @@ public interface RoleRepository {
     void add(Role role);
 
     Role getRoleById(Long id);
+
     List<Role> getRoleByIds(List<Long> roleIds);
 
 }
