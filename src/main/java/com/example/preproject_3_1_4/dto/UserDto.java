@@ -9,7 +9,6 @@ public class UserDto {
 
     private String surname;
     private String password;
-    private Long role;
     private List<Long> roles;
 
     public UserDto() {
@@ -21,13 +20,6 @@ public class UserDto {
         this.surname = surname;
         this.password = password;
         this.roles = roles;
-    }
-
-    public UserDto(String username, String surname, String password, Long role) {
-        this.username = username;
-        this.surname = surname;
-        this.password = password;
-        this.role = role;
     }
 
     public Long getId() {
@@ -62,13 +54,6 @@ public class UserDto {
         this.password = password;
     }
 
-    public Long getRole() {
-        return role;
-    }
-
-    public void setRole(Long role) {
-        this.role = role;
-    }
     public List<Long> getRoles() {
         return roles;
     }
