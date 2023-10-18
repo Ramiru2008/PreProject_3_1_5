@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -28,15 +29,21 @@ public class AdminController {
     }
 
     @GetMapping("/users")
-    public String show(Model model) {
+    public String show(Model model, Principal principal) {
+        String username = principal.getName();
+        User currentUser = userService.findByUsername(username);
+        model.addAttribute("currentUser", currentUser);
         model.addAttribute("user", userService.getAllUsers());
         return "users";
     }
 
     @GetMapping("/new")
-    public String registration(Model model) {
+    public String registration(Model model, Principal principal) {
+        String username = principal.getName();
+        User currentUser = userService.findByUsername(username);
         User user = new User();
         Collection<Role> roles = roleService.getAllRoles();
+        model.addAttribute("currentUser", currentUser);
         model.addAttribute("user", user);
         model.addAttribute("roles", roles);
         return "new";

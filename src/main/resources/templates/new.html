@@ -1,33 +1,92 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create users</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Admin panel</title>
+    <link href rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+          crossorigin="anonymous">
 </head>
 <body>
-<form action="#" th:method="POST" th:action="@{/admin/users}" th:object="${user}">
-    <input type="hidden" th:field="*{id}"/>
-    <label for="username">Username</label>
-    <input type="text" th:field="*{username}" id="username">
-    <br/>
-    <label for="surname">Surname</label>
-    <input type="text" th:field="*{surname}" id="surname">
-    <br/>
-    <label for="password">Password</label>
-    <input type="text" th:field="*{password}" id="password">
-    <br/>
-        <p>
-            <label>Roles:
-                <input type="checkbox" name="roles"
-                       th:each="role : ${roles}"
-                       th:text="${role.name}"
-                       th:value="${role.id}"
-                       th:field="*{roles}"
-                />
-            </label>
-        </p>
-    <input type="submit" value="Create user">
-</form>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <span class="navbar-brand text-white">
+           <span th:if="${currentUser != null}" th:text= "${currentUser.surname}"></span>
+           <span th:if="${currentUser != null}" th:text="${currentUser.id}"></span>
+        </span>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-dark text-secondary">Logout</button>
+        </form>
+    </div>
+</nav>
+
+<section>
+    <div class="container-fluid" style="background-color: white">
+        <div class="row">
+            <div class="p-0 col-2">
+                <nav class="nav-pills nav flex-column pt-2">
+                    <a class="nav-link active" href="/admin/users">Admin</a>
+                    <a class="nav-link" href="/user">User</a>
+
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link active" href="/admin" sec:authorize="hasAuthority('ADMIN')" role="tab"
+                           aria-controls="v-pills-home" aria-selected="true">Admin</a>
+                        <a class="nav-link" href="/user" sec:authorize="(hasAnyAuthority('ADMIN', 'USER'))"
+                           role="tab"
+                           aria-controls="v-pills-profile" aria-selected="false">User</a>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-10 px-0">
+                <div class="container-fluid" style="background-color: white">
+                    <h1 class="m-0 fw-bold">Admin panel</h1>
+                    <div class="tab-content" id="tabContent">
+                        <ul class="nav nav-tabs">
+                            <a class="nav-link" data-toggle="tab">Users Table</a>
+                            <a class="nav-link active" data-toggle="tab" th:href="@{/admin/new}">Create New User</a>
+                        </ul>
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="m-1">
+                                    <h4>Create New User</h4>
+                                </div>
+                            </div>
+                            </head>
+                            <body>
+                            <form action="#" th:method="POST" th:action="@{/admin/users}" th:object="${user}">
+                                <input type="hidden" th:field="*{id}"/>
+                                <label for="username">Username</label>
+                                <input type="text" th:field="*{username}" id="username">
+                                <br/>
+                                <label for="surname">Surname</label>
+                                <input type="text" th:field="*{surname}" id="surname">
+                                <br/>
+                                <label for="password">Password</label>
+                                <input type="text" th:field="*{password}" id="password">
+                                <br/>
+                                <p>
+                                    <label>Roles:
+                                        <input type="checkbox" name="roles"
+                                               th:each="role : ${roles}"
+                                               th:text="${role.name}"
+                                               th:value="${role.id}"
+                                               th:field="*{roles}"
+                                        />
+                                    </label>
+                                </p>
+                                <input type="submit" value="Create user">
+                            </form>
+                            </body>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>
 
