@@ -3,7 +3,8 @@
       lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Admin panel</title>
     <link href rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
@@ -24,21 +25,21 @@
 
 <section>
     <div class="container-fluid" style="background-color: white">
-        <div class="row" >
-            <div class="p-0 col-2" >
+        <div class="row">
+            <div class="p-0 col-2">
                 <nav class="nav-pills nav flex-column pt-2">
-                        <a class="nav-link active" href="/admin/users">Admin</a>
-                        <a class="nav-link" href="/user">User</a>
+                    <a class="nav-link active" href="/admin/users">Admin</a>
+                    <a class="nav-link" href="/user">User</a>
 
-                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active" href="/admin" sec:authorize="hasAuthority('ADMIN')" role="tab"
-                       aria-controls="v-pills-home" aria-selected="true">Admin</a>
-                    <a class="nav-link" href="/user" sec:authorize="(hasAnyAuthority('ADMIN', 'USER'))"
-                       role="tab"
-                       aria-controls="v-pills-profile" aria-selected="false">User</a>
-                </div>
-                </nav>
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link active" href="/admin" sec:authorize="hasAuthority('ADMIN')" role="tab"
+                           aria-controls="v-pills-home" aria-selected="true">Admin</a>
+                        <a class="nav-link" href="/user" sec:authorize="(hasAnyAuthority('ADMIN', 'USER'))"
+                           role="tab"
+                           aria-controls="v-pills-profile" aria-selected="false">User</a>
                     </div>
+                </nav>
+            </div>
             <div class="col-10 px-0">
                 <div class="container-fluid" style="background-color: white">
                     <h1 class="m-0 fw-bold">Admin panel</h1>
@@ -53,40 +54,41 @@
                                     <h4>All users</h4>
                                 </div>
                             </div>
-<form th:method="GET" th:action="@{/admin/new}">
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-    </ul>
-</form>
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>Surname</th>
-        <th>Password</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="user:${user}">
-        <td th:text="${user.id}"></td>
-        <td th:text="${user.username}"></td>
-        <td th:text="${user.surname}"></td>
-        <td th:text="${user.password}"></td>
+                            <form th:method="GET" th:action="@{/admin/new}">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                </ul>
+                            </form>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Username</th>
+                                    <th>Surname</th>
+                                    <th>Password</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="user:${user}">
+                                    <td th:text="${user.id}"></td>
+                                    <td th:text="${user.username}"></td>
+                                    <td th:text="${user.surname}"></td>
+                                    <td th:text="${user.password}"></td>
 
-        <td>
-            <a class="btn btn-info" th:href="@{/admin/{id}/edit(id=${user.getId()})}">Edit</a>
-        </td>
-        <td>
-            <form th:method="DELETE" th:action="@{/admin/users/{id}(id=${user.getId()})}">
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<br/>
-<br/>
+                                    <td>
+                                        <a class="btn btn-info"
+                                           th:href="@{/admin/{id}/edit(id=${user.getId()})}">Edit</a>
+                                    </td>
+                                    <td>
+                                        <form th:method="DELETE" th:action="@{/admin/users/{id}(id=${user.getId()})}">
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <br/>
+                            <br/>
                         </div>
                     </div>
                 </div>

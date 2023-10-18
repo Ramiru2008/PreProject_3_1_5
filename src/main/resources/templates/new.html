@@ -45,8 +45,8 @@
                     <h1 class="m-0 fw-bold">Admin panel</h1>
                     <div class="tab-content" id="tabContent">
                         <ul class="nav nav-tabs">
-                            <a class="nav-link" data-toggle="tab">Users Table</a>
-                            <a class="nav-link active" data-toggle="tab" th:href="@{/admin/new}">Create New User</a>
+                            <a class="nav-link" data-toggle="tab" th:href="@{/admin/users}">Users Table</a>
+                            <a class="nav-link active" data-toggle="tab">Create New User</a>
                         </ul>
                         <div class="card">
                             <div class="card-header">
@@ -54,32 +54,32 @@
                                     <h4>Create New User</h4>
                                 </div>
                             </div>
-                            </head>
-                            <body>
-                            <form action="#" th:method="POST" th:action="@{/admin/users}" th:object="${user}">
-                                <input type="hidden" th:field="*{id}"/>
-                                <label for="username">Username</label>
-                                <input type="text" th:field="*{username}" id="username">
-                                <br/>
-                                <label for="surname">Surname</label>
-                                <input type="text" th:field="*{surname}" id="surname">
-                                <br/>
-                                <label for="password">Password</label>
-                                <input type="text" th:field="*{password}" id="password">
-                                <br/>
-                                <p>
-                                    <label>Roles:
-                                        <input type="checkbox" name="roles"
-                                               th:each="role : ${roles}"
-                                               th:text="${role.name}"
-                                               th:value="${role.id}"
-                                               th:field="*{roles}"
-                                        />
-                                    </label>
-                                </p>
-                                <input type="submit" value="Create user">
-                            </form>
-                            </body>
+                            <div class="col-md bg-white border">
+                                <form align="center" class="offset-md-4 col-md-3 mt-4 mb-4"
+                                      th:align="center"
+                                      th:action="@{/admin/users}"
+                                      th:object="${user}"
+                                      method="POST">
+                                    <label for="username"><b>Username</b></label>
+                                    <input th:name="username" th:field="*{username}" th:type="text" class="form-control" id="username" required/>
+                                    <br>
+                                    <label for="surname"><b>Surname</b></label>
+                                    <input th:name="surname" th:field="*{surname}" th:type="text" class="form-control" id="surname" required/>
+                                    <br>
+                                    <label for="password"><b>Password</b></label>
+                                    <input th:name="password" th:field="*{password}" th:type="password" class="form-control"
+                                           id="password"/>
+                                    <br>
+                                    <label for="roles"><b>Role</b></label>
+                                    <select multiple class="form-control form-control-sm" id="roles" name="roles" size="2" required>
+                                                <option value="1">ADMIN</option>
+                                                <option selected="selected" value="2">USER</option>
+                                    </select>
+                                    <br>
+                                    <button th:type="submit" class="btn btn-success btn-lg" value="Create New User">Create New User
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
