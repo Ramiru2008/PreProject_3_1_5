@@ -10,14 +10,12 @@
     <title>User Page</title>
 </head>
 <body>
-
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
-        <p class="navbar-brand text-white">
-            <b><span class="align-middle" th:text="${user.username}"></span></b>
-            <span class="align-middle">with ID:</span>
-            <span class="align-middle" th:text="${user.id}"></span>
-        </p>
+        <span class="navbar-brand text-white">
+           <span th:text="${user.surname}"></span>
+           <span th:text="${user.id}"></span>
+        </span>
         <form th:action="@{/logout}" method="post">
             <button type="submit" class="btn btn-dark text-secondary">Logout</button>
         </form>
@@ -47,7 +45,7 @@
                 <div class="pt-2 tab-content">
                     <div class="tab-pane fade show active" id="description">
                         <div class="p-3 border">
-                            <h5 class="my-0 mx-2">User info</h5>
+                            <h4>User Info</h4>
                         </div>
                         <div class="p-3 bg-white border border-top-0">
                             <table class="usersTable table table-striped bg-white">
