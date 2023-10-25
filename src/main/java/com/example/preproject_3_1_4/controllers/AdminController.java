@@ -80,7 +80,7 @@ public class AdminController {
 
     @PatchMapping("/{id}")
     public String editUser(@ModelAttribute("user") UserDto userDto) {
-        User user = userService.findByUsername(userDto.getUsername());
+        User user = userService.getUserById(userDto.getId());
         List<Role> roles = roleService.getRoleByIds(userDto.getRoles());
 
         Set<Role> setRoles = new HashSet<>(roles);
