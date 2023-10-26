@@ -14,6 +14,6 @@ public class LoginController {
 
     @GetMapping("/authenticated")
     public String pageForAuthenticatedUsers(Principal principal) {
-        return "user" + principal.getName();
+        return "adminuser" + principal.getName();
     }
 }

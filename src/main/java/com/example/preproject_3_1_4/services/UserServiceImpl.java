@@ -39,8 +39,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     @Transactional
     public void add(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.add(user);
+        if (!user.getPassword().isEmpty()) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            userRepository.add(user);
+        }
     }
 
     @Override
@@ -65,7 +67,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     @Transactional
     public void edit(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.edit(user);
     }
 

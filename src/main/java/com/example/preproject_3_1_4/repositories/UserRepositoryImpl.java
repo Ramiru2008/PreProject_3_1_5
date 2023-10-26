@@ -47,6 +47,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public void edit(User user) {
         em.merge(user);
+
     }
 
     @Override

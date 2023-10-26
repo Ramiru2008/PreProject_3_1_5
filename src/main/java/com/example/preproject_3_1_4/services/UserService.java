@@ -1,6 +1,7 @@
 package com.example.preproject_3_1_4.services;
 
 import com.example.preproject_3_1_4.entities.User;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -11,9 +12,9 @@ public interface UserService {
 
     void removeUserById(Long id);
 
-    void edit(User user);
-
     User getUserById(Long id);
 
     User findByUsername(String username);
+
+    void edit(User user);
 }

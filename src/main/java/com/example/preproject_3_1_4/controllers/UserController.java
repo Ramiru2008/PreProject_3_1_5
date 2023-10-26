@@ -20,4 +20,9 @@ public class UserController {
         model.addAttribute("user", userService.findByUsername(principal.getName()));
         return "user";
     }
+    @GetMapping("/adminuser")
+    public String getAdminUser(Principal principal, ModelMap model) {
+        model.addAttribute("user", userService.findByUsername(principal.getName()));
+        return "adminuser";
+    }
 }
