@@ -1,8 +1,5 @@
 package com.example.preproject_3_1_4.dto;
 
-
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import java.util.List;
 
 public class UserDto {

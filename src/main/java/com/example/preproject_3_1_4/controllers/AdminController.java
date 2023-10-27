@@ -12,10 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 @Controller
@@ -64,16 +61,16 @@ public class AdminController {
             );
             userService.add(user);
         } else {
-            return "redirect: /admin/login";
+            return "redirect:/admin/users";
         }
         return "redirect:/admin/users";
     }
+
     @GetMapping("/{id}")
     public String getUserById(@PathVariable("id") Long id, ModelMap model) {
         model.addAttribute("user", userService.getUserById(id));
         return "user";
     }
-
 
 
     @PatchMapping("/{id}")
@@ -86,14 +83,19 @@ public class AdminController {
         user.setSurname(userDto.getSurname());
         user.setUsername(userDto.getUsername());
         if (!userDto.getPassword().isEmpty()) {
-        userService.edit(user);
+            userService.edit(user);
         }
         return "redirect:/admin/users";
     }
 
     @DeleteMapping("/users/{id}")
-    public String deleteUser(@PathVariable("id") Long id) {
-        userService.removeUserById(id);
-        return "redirect:/admin/users/";
+    public String deleteUser(@PathVariable("id") Long id, Principal principal) {
+        String logUsername = principal.getName();
+        User currentUser = userService.findByUsername(logUsername);
+        User userToDel = userService.getUserById(id);
+        if (!userToDel.equals(currentUser)) {
+            userService.removeUserById(id);
+        }
+        return "redirect:/admin/users";
     }
 }
