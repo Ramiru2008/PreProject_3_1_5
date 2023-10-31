@@ -96,7 +96,8 @@
                                             <td th:text="${user.password}"></td>
 
 
-                                            <!-- Кнопки модальных окон Edit и Delete -->
+
+                                                <!-- Кнопки модальных окон Edit и Delete -->
 
 
                                             <td>
@@ -112,7 +113,8 @@
                                                 </button>
                                             </td>
 
-                                            <!-- -------------------------- Здесь наполняем модальное окно Edit ------------------------ -->
+
+                                                <!-- -------------------------- Здесь наполняем модальное окно Edit ------------------------ -->
 
                                             <div class="modal fade" id="editModal" tabindex="-1" role="dialog"
                                                  aria-labelledby="editModalLabel" aria-hidden="true"
@@ -232,6 +234,9 @@
 
                                                                 <!--   --------------Здесь кнопки тн подвала Delete ----------- -->
 
+                                                                <div class="alert alert-danger mt-3" th:if="${user.id == currentUser.id}">
+                                                                    <strong>Внимание!</strong> Этого пользователя удалить нельзя!
+                                                                </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary"
                                                                             data-dismiss="modal">Close
