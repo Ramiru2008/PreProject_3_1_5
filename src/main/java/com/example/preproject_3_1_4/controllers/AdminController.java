@@ -60,8 +60,6 @@ public class AdminController {
                     new HashSet<>(roles)
             );
             userService.add(user);
-        } else {
-            return "redirect:/admin/users";
         }
         return "redirect:/admin/users";
     }
