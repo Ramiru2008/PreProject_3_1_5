@@ -5,14 +5,13 @@ import com.example.preproject_3_1_4.entities.Role;
 import com.example.preproject_3_1_4.entities.User;
 import com.example.preproject_3_1_4.services.RoleService;
 import com.example.preproject_3_1_4.services.UserService;
-import org.hibernate.service.spi.ServiceException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import java.security.Principal;
 import java.util.*;
