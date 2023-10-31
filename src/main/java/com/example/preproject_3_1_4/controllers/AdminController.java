@@ -5,6 +5,7 @@ import com.example.preproject_3_1_4.entities.Role;
 import com.example.preproject_3_1_4.entities.User;
 import com.example.preproject_3_1_4.services.RoleService;
 import com.example.preproject_3_1_4.services.UserService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +33,9 @@ public class AdminController {
     public String show(Model model, Principal principal) {
         String username = principal.getName();
         User currentUser = userService.findByUsername(username);
+        if (currentUser == null) {
+            throw new UsernameNotFoundException("ERROR");
+        }
         model.addAttribute("currentUser", currentUser);
         model.addAttribute("user", userService.getAllUsers());
         return "users";
