@@ -1,6 +1,6 @@
-package com.example.preproject_3_1_4.controllers;
+package com.example.preproject_3_1_5.controllers;
 
-import com.example.preproject_3_1_4.services.UserService;
+import com.example.preproject_3_1_5.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;

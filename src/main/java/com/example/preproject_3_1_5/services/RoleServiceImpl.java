@@ -1,7 +1,7 @@
-package com.example.preproject_3_1_4.services;
+package com.example.preproject_3_1_5.services;
 
-import com.example.preproject_3_1_4.entities.Role;
-import com.example.preproject_3_1_4.repositories.RoleRepository;
+import com.example.preproject_3_1_5.entities.Role;
+import com.example.preproject_3_1_5.repositories.RoleRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

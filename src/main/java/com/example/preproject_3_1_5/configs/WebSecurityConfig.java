@@ -1,6 +1,6 @@
-package com.example.preproject_3_1_4.configs;
+package com.example.preproject_3_1_5.configs;
 
-import com.example.preproject_3_1_4.services.UserServiceImpl;
+import com.example.preproject_3_1_5.services.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;

@@ -1,9 +1,9 @@
-package com.example.preproject_3_1_4.configs;
+package com.example.preproject_3_1_5.configs;
 
-import com.example.preproject_3_1_4.entities.Role;
-import com.example.preproject_3_1_4.entities.User;
-import com.example.preproject_3_1_4.services.RoleService;
-import com.example.preproject_3_1_4.services.UserService;
+import com.example.preproject_3_1_5.entities.Role;
+import com.example.preproject_3_1_5.entities.User;
+import com.example.preproject_3_1_5.services.RoleService;
+import com.example.preproject_3_1_5.services.UserService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -32,10 +32,10 @@ public class Init {
         userRoles.add(roleUser);
         roleService.add(roleUser);
 
-        User admin = new User("Roman", "Kudasov", "123", adminRoles);
+        User admin = new User("Ramiru2008", "Roman", "Kudasov", 44, "123", adminRoles);
         userService.add(admin);
 
-        User user = new User("Corey", "Taylor", "123", userRoles);
+        User user = new User("Slipknot", "Corey", "Taylor", 43, "123", userRoles);
         userService.add(user);
 
     }

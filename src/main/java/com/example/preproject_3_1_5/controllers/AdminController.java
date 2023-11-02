@@ -1,10 +1,10 @@
-package com.example.preproject_3_1_4.controllers;
+package com.example.preproject_3_1_5.controllers;
 
-import com.example.preproject_3_1_4.dto.UserDto;
-import com.example.preproject_3_1_4.entities.Role;
-import com.example.preproject_3_1_4.entities.User;
-import com.example.preproject_3_1_4.services.RoleService;
-import com.example.preproject_3_1_4.services.UserService;
+import com.example.preproject_3_1_5.dto.UserDto;
+import com.example.preproject_3_1_5.entities.Role;
+import com.example.preproject_3_1_5.entities.User;
+import com.example.preproject_3_1_5.services.RoleService;
+import com.example.preproject_3_1_5.services.UserService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -60,7 +60,9 @@ public class AdminController {
         if (userService.findByUsername(userDto.getUsername()) == null) {
             User user = new User(
                     userDto.getUsername(),
-                    userDto.getSurname(),
+                    userDto.getFirstName(),
+                    userDto.getLastName(),
+                    userDto.getAge(),
                     userDto.getPassword(),
                     new HashSet<>(roles)
             );
@@ -83,8 +85,10 @@ public class AdminController {
 
         Set<Role> setRoles = new HashSet<>(roles);
         user.setRoles(setRoles);
-        user.setSurname(userDto.getSurname());
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
         user.setUsername(userDto.getUsername());
+        user.setAge(userDto.getAge());
         if (!userDto.getPassword().isEmpty()) {
             userService.edit(user);
         }

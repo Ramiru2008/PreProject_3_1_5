@@ -1,4 +1,4 @@
-package com.example.preproject_3_1_4.entities;
+package com.example.preproject_3_1_5.entities;
 
 
 import org.springframework.security.core.GrantedAuthority;
@@ -76,10 +76,7 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", users=" + users +
-                '}';
+        String roleToPrint = name.replace("ROLE_", "");
+        return roleToPrint + " ";
     }
 }

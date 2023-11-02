@@ -1,8 +1,8 @@
-package com.example.preproject_3_1_4.services;
+package com.example.preproject_3_1_5.services;
 
-import com.example.preproject_3_1_4.entities.Role;
-import com.example.preproject_3_1_4.entities.User;
-import com.example.preproject_3_1_4.repositories.UserRepository;
+import com.example.preproject_3_1_5.entities.Role;
+import com.example.preproject_3_1_5.entities.User;
+import com.example.preproject_3_1_5.repositories.UserRepository;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
