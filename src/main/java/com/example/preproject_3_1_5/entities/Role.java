@@ -1,6 +1,9 @@
 package com.example.preproject_3_1_5.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -16,18 +19,19 @@ public class Role implements GrantedAuthority {
     private Long id;
     @Column(name = "role_name")
     private String name;
+    @JsonBackReference
     @ManyToMany(mappedBy = "roles")
     private Set<User> users = new HashSet<>();
 
     public Role() {
 
     }
-
-    public Role(Long id) {
+@JsonCreator
+    public Role(@JsonProperty("id") Long id) {
         this.id = id;
     }
-
-    public Role(String name) {
+@JsonCreator
+    public Role(@JsonProperty("name") String name) {
         this.name = name;
     }
 

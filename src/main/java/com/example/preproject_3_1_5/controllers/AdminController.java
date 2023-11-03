@@ -1,15 +1,13 @@
 package com.example.preproject_3_1_5.controllers;
 
+import com.example.preproject_3_1_5.exception_handling.NoSuchUserException;
 import com.example.preproject_3_1_5.dto.UserDto;
 import com.example.preproject_3_1_5.entities.Role;
 import com.example.preproject_3_1_5.entities.User;
 import com.example.preproject_3_1_5.services.RoleService;
 import com.example.preproject_3_1_5.services.UserService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -17,7 +15,7 @@ import java.security.Principal;
 import java.util.*;
 
 
-@Controller
+@RestController
 @RequestMapping("/admin")
 public class AdminController {
     private final UserService userService;
@@ -31,33 +29,14 @@ public class AdminController {
     }
 
     @GetMapping("/users")
-    public String show(Model model, Principal principal) {
-        String username = principal.getName();
-        User currentUser = userService.findByUsername(username);
-        if (currentUser == null) {
-            throw new UsernameNotFoundException("ERROR");
-        }
-        model.addAttribute("currentUser", currentUser);
-        model.addAttribute("user", userService.getAllUsers());
-        return "users";
+    public List<User> show() {
+        List<User> users = userService.getAllUsers();
+        return users;
     }
 
-    @GetMapping("/new")
-    public String registration(Model model, Principal principal) {
-        String username = principal.getName();
-        User currentUser = userService.findByUsername(username);
-        User user = new User();
-        Collection<Role> roles = roleService.getAllRoles();
-        model.addAttribute("currentUser", currentUser);
-        model.addAttribute("user", user);
-        model.addAttribute("roles", roles);
-        return "new";
-    }
-
-    @PostMapping("/users")
-    public String create(@ModelAttribute("user") UserDto userDto) {
+    @PostMapping(value = "/users")
+    public User create(@RequestBody UserDto userDto) {
         List<Role> roles = roleService.getRoleByIds(userDto.getRoles());
-        if (userService.findByUsername(userDto.getUsername()) == null) {
             User user = new User(
                     userDto.getUsername(),
                     userDto.getFirstName(),
@@ -67,22 +46,23 @@ public class AdminController {
                     new HashSet<>(roles)
             );
             userService.add(user);
+        return user;
+    }
+
+    @GetMapping("/users/{id}")
+    public User getUserById(@PathVariable("id") Long id) {
+        User user = userService.getUserById(id);
+        if (user == null) {
+            throw new NoSuchUserException("There is no User with ID = " + id + " in Database");
         }
-        return "redirect:/admin/users";
-    }
-
-    @GetMapping("/{id}")
-    public String getUserById(@PathVariable("id") Long id, ModelMap model) {
-        model.addAttribute("user", userService.getUserById(id));
-        return "user";
+        return user;
     }
 
 
-    @PatchMapping("/{id}")
-    public String editUser(@ModelAttribute("user") UserDto userDto) {
+    @PutMapping("/users")
+    public User editUser(@RequestBody UserDto userDto) {
         User user = userService.getUserById(userDto.getId());
         List<Role> roles = roleService.getRoleByIds(userDto.getRoles());
-
         Set<Role> setRoles = new HashSet<>(roles);
         user.setRoles(setRoles);
         user.setFirstName(userDto.getFirstName());
@@ -90,19 +70,16 @@ public class AdminController {
         user.setUsername(userDto.getUsername());
         user.setAge(userDto.getAge());
         if (!userDto.getPassword().isEmpty()) {
-            userService.edit(user);
+       userService.edit(user);
         }
-        return "redirect:/admin/users";
+       return user;
     }
 
     @DeleteMapping("/users/{id}")
-    public String deleteUser(@PathVariable("id") Long id, Principal principal, Model model) {
-        String logUsername = principal.getName();
-        User currentUser = userService.findByUsername(logUsername);
-        User userToDel = userService.getUserById(id);
-        if (!userToDel.equals(currentUser))
-            { userService.removeUserById(id);
-        }
-        return "redirect:/admin/users";
+    public String deleteUser(@PathVariable("id") Long id) {
+        userService.removeUserById(id);
+
+        return "User with ID = " + id + " was deleted";
     }
+
 }

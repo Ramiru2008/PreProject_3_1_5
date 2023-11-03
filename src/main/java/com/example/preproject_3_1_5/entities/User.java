@@ -1,6 +1,8 @@
 package com.example.preproject_3_1_5.entities;
 
-
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -29,6 +31,7 @@ public class User implements UserDetails {
 
     @Column(name = "password")
     private String password;
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -38,8 +41,13 @@ public class User implements UserDetails {
     public User() {
 
     }
-
-    public User(String username, String firstName, String lastName, Integer age, String password, Set<Role> roles) {
+@JsonCreator
+    public User(@JsonProperty("username") String username,
+                @JsonProperty("firstName") String firstName,
+                @JsonProperty("lastName") String lastName,
+                @JsonProperty("age") Integer age,
+                @JsonProperty("password") String password,
+                @JsonProperty("roles") Set<Role> roles) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;

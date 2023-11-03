@@ -1,5 +1,8 @@
 package com.example.preproject_3_1_5.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class UserDto {
@@ -13,8 +16,14 @@ private Integer age;
 
     public UserDto() {
     }
-
-    public UserDto(Long id, String username, String firstName, String lastName, Integer age, String password, List<Long> roles) {
+@JsonCreator
+    public UserDto(@JsonProperty ("id") Long id,
+                  @JsonProperty("username") String username,
+                   @JsonProperty("firstName") String firstName,
+                   @JsonProperty("lastName") String lastName,
+                   @JsonProperty("age") Integer age,
+                   @JsonProperty("password") String password,
+                   @JsonProperty("roles") List<Long> roles) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
