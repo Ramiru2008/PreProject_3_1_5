@@ -7,11 +7,10 @@ import com.example.preproject_3_1_5.entities.User;
 import com.example.preproject_3_1_5.services.RoleService;
 import com.example.preproject_3_1_5.services.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.*;
 
 
-import java.security.Principal;
 import java.util.*;
 
 
