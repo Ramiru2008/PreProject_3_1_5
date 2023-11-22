@@ -1,92 +1,90 @@
 package com.example.preproject_3_1_5.entities;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import javax.validation.constraints.*;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(name = "username")
-    private String username;
-    @Column(name = "firstName")
-    private String firstName;
+    private Long userId;
 
-    @Column(name = "lastName")
-    private String lastName;
-    @Column(name="age")
+    @Column
+    private String name;
+
+    @Column
+    private String surname;
+    @Column
     private Integer age;
 
-    @Column(name = "password")
-    private String password;
-    @JsonManagedReference
-    @ManyToMany
-    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    @Email
+    private String email;
 
+    @NotEmpty(message = "Username cannot be empty")
+    @Column(unique = true, length = 100)
+    private String username;
+
+    @NotEmpty(message = "Password cannot be empty")
+    @Size(min = 3, message = "Password should be greater then 3 symbols")
+    private String password;
+
+    @ManyToMany
+    @Fetch(FetchMode.JOIN)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "userId"),
+            inverseJoinColumns = @JoinColumn(name = "roleId"))
+    private Set<Role> roles;
 
     public User() {
-
     }
-@JsonCreator
-    public User(@JsonProperty("username") String username,
-                @JsonProperty("firstName") String firstName,
-                @JsonProperty("lastName") String lastName,
-                @JsonProperty("age") Integer age,
-                @JsonProperty("password") String password,
-                @JsonProperty("roles") Set<Role> roles) {
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
+
+    public User(String name, String surname, Integer age, String email, String username, String password, Set<Role> roles) {
+        this.name = name;
+        this.surname = surname;
         this.age = age;
+        this.email = email;
+        this.username = username;
         this.password = password;
         this.roles = roles;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public Long getUserId() {
+        return userId;
     }
 
-    public String getLastName() {
-        return lastName;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public Integer getAge() {
@@ -97,13 +95,12 @@ public class User implements UserDetails {
         this.age = age;
     }
 
-    @Override
-    public String getPassword() {
-        return password;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Set<Role> getRoles() {
@@ -114,9 +111,26 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<Role> roles = getRoles();
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getRole()));
+        }
+        return authorities;
+    }
 
+    @Override
+    public String getPassword() {
+        return password;
+    }
 
+    @Override
+    public String getUsername() {
+        return username;
+    }
 
     @Override
     public boolean isAccountNonExpired() {
@@ -136,23 +150,5 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRoles();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(age, user.age) && Objects.equals(password, user.password) && Objects.equals(roles, user.roles);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, username, firstName, lastName, age, password, roles);
     }
 }

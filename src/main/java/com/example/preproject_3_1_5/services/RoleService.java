@@ -4,14 +4,13 @@ import com.example.preproject_3_1_5.entities.Role;
 
 import java.util.List;
 
-
 public interface RoleService {
     List<Role> getAllRoles();
 
-    void add(Role role);
+    Role getRole(String userRole);
 
     Role getRoleById(Long id);
 
-    List<Role> getRoleByIds(List<Long> roleIds);
+    void addRole(Role role);
 
 }

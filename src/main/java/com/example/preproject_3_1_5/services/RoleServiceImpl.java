@@ -2,17 +2,17 @@ package com.example.preproject_3_1_5.services;
 
 import com.example.preproject_3_1_5.entities.Role;
 import com.example.preproject_3_1_5.repositories.RoleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-
 @Service
-@Transactional(readOnly = true)
 public class RoleServiceImpl implements RoleService {
     private final RoleRepository roleRepository;
 
+    @Autowired
     public RoleServiceImpl(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
@@ -23,9 +23,8 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    @Transactional
-    public void add(Role role) {
-        roleRepository.add(role);
+    public Role getRole(String userRole) {
+        return roleRepository.getRole(userRole);
     }
 
     @Override
@@ -34,9 +33,9 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<Role> getRoleByIds(List<Long> roleIds) {
-        return roleRepository.getRoleByIds(roleIds);
+    @Transactional
+    public void addRole(Role role) {
+        roleRepository.addRole(role);
     }
 
 }
-

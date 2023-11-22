@@ -25,19 +25,18 @@ public class Init {
         Role roleAdmin = new Role("ROLE_ADMIN");
         Set<Role> adminRoles = new HashSet<>();
         adminRoles.add(roleAdmin);
-        roleService.add(roleAdmin);
+        roleService.addRole(roleAdmin);
 
         Role roleUser = new Role("ROLE_USER");
         Set<Role> userRoles = new HashSet<>();
         userRoles.add(roleUser);
-        roleService.add(roleUser);
+        roleService.addRole(roleUser);
 
-        User admin = new User("Ramiru2008", "Roman", "Kudasov", 44, "123", adminRoles);
+        User admin = new User("Roman", "Kudasov", 44, "rkudasov@gmail.com", "Ramiru2008", "123", adminRoles);
         userService.add(admin);
 
-        User user = new User("Slipknot", "Corey", "Taylor", 43, "123", userRoles);
+        User user = new User("Corey", "Taylor", 43,"slipknot@gmail.com", "Slipknot", "123", userRoles);
         userService.add(user);
 
     }
 }
-

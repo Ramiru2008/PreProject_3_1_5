@@ -1,15 +1,17 @@
 package com.example.preproject_3_1_5;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.client.RestTemplate;
+import java.io.IOException;
 
 @SpringBootApplication
 public class PreProject315Application {
 
-    public static void main(String[] args) {
-        SpringApplication.run(PreProject315Application.class, args);
+    public static void main(String[] args) throws IOException {
+        org.springframework.boot.SpringApplication.run(PreProject315Application.class, args);
+        openHomePage();
     }
-
+    private static void openHomePage() throws IOException {
+        Runtime rt = Runtime.getRuntime();
+        rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://localhost:8080/");
+    }
 }

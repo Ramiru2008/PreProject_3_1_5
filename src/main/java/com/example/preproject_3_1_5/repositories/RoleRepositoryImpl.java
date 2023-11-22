@@ -2,24 +2,29 @@ package com.example.preproject_3_1_5.repositories;
 
 import com.example.preproject_3_1_5.entities.Role;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+
 @Repository
+@Transactional
 public class RoleRepositoryImpl implements RoleRepository {
+
     @PersistenceContext
     private EntityManager em;
 
     @Override
     public List<Role> getAllRoles() {
-        return em.createQuery("from Role", Role.class).getResultList();
+        return em.createQuery("select r from Role r", Role.class).getResultList();
     }
 
     @Override
-    public void add(Role role) {
-        em.persist(role);
+    public Role getRole(String userRole) {
+        return em.createQuery("select r from Role r where r.role =: userRole", Role.class)
+                .setParameter("userRole", userRole).getSingleResult();
     }
 
     @Override
@@ -28,9 +33,8 @@ public class RoleRepositoryImpl implements RoleRepository {
     }
 
     @Override
-    public List<Role> getRoleByIds(List<Long> roleIds) {
-        return em.createQuery("select r from Role r where r.id in ?1", Role.class)
-                .setParameter(1, roleIds)
-                .getResultList();
+    public void addRole(Role role) {
+        em.persist(role);
     }
+
 }

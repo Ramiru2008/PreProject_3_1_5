@@ -4,20 +4,16 @@ import com.example.preproject_3_1_5.entities.User;
 
 import java.util.List;
 
-
 public interface UserRepository {
-    User findByUsername(String username);
+    void saveUser(User user);
+
+    void updateUser(User user);
+
+    void deleteUser(long id);
 
     List<User> getAllUsers();
 
-    void add(User user);
+    User findByUsername(String username);
 
-    void removeUserById(Long id);
-
-
-    void edit(User user);
-
-    User getUserById(Long id);
-
-
+    User getUserById(long id);
 }

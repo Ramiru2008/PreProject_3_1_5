@@ -1,20 +1,21 @@
 package com.example.preproject_3_1_5.services;
 
 import com.example.preproject_3_1_5.entities.User;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.Valid;
 import java.util.List;
 
-public interface UserService {
-    List<User> getAllUsers();
 
+public interface UserService {
     void add(User user);
 
-    void removeUserById(Long id);
+    void edit(@Valid User user);
 
-    User getUserById(Long id);
+    void removeUserById(long id);
+
+    List<User> getAllUsers();
 
     User findByUsername(String username);
 
-    void edit(User user);
+    User getUserById(long id);
 }
