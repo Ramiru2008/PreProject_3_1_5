@@ -1,7 +1,7 @@
 package com.example.preproject_3_1_5.entities;
 
-
 import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
 
 @Entity

@@ -28,12 +28,12 @@ async function editUser(modal, id) {
                 </div>
 
                 <div class="form-group">
-                    <label for="name" class="com-form-label">Name</label>
+                    <label for="name" class="com-form-label">FirstName</label>
                     <input type="text" class="form-control" id="name" value="${user.name}">
                 </div>
 
                 <div class="form-group">
-                    <label for="surname" class="com-form-label">Surname</label>
+                    <label for="surname" class="com-form-label">Lastame</label>
                     <input type="text" class="form-control" id="surname" value="${user.surname}">
                 </div>
 

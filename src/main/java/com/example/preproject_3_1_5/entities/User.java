@@ -16,25 +16,26 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
-    @Column
+    @NotEmpty(message = "FirstName cannot be empty")
     private String name;
 
-    @Column
+    @NotEmpty(message = "LastName cannot be empty")
     private String surname;
-    @Column
+
+    @Min(value = 0, message = "Age should be >= 0")
     private Integer age;
 
     @Email
     private String email;
 
     @NotEmpty(message = "Username cannot be empty")
-    @Column(unique = true, length = 100)
+    @Column(unique = true)
     private String username;
 
     @NotEmpty(message = "Password cannot be empty")
-    @Size(min = 3, message = "Password should be greater then 3 symbols")
     private String password;
 
+    @NotEmpty(message = "The role cannot be omitted")
     @ManyToMany
     @Fetch(FetchMode.JOIN)
     @JoinTable(name = "users_roles",

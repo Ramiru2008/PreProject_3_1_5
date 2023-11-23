@@ -17,7 +17,7 @@ async function getUser() {
             `;
             table.innerHTML = temp;
 
-            $(function (){
+            $(function () {
                 let role = ""
                 for (let i = 0; i < user.roles.length; i++) {
                     role = user.roles[i].role

@@ -35,7 +35,7 @@ public class Init {
         User admin = new User("Roman", "Kudasov", 44, "rkudasov@gmail.com", "Ramiru2008", "123", adminRoles);
         userService.add(admin);
 
-        User user = new User("Corey", "Taylor", 43,"slipknot@gmail.com", "Slipknot", "123", userRoles);
+        User user = new User("Corey", "Taylor", 43, "slipknot@gmail.com", "Slipknot", "123", userRoles);
         userService.add(user);
 
     }

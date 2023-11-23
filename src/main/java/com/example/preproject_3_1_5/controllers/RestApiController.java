@@ -1,6 +1,5 @@
 package com.example.preproject_3_1_5.controllers;
 
-
 import com.example.preproject_3_1_5.entities.User;
 import com.example.preproject_3_1_5.exception_handling.ExceptionInfo;
 import com.example.preproject_3_1_5.exception_handling.UsernameExistException;
@@ -10,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -46,7 +44,6 @@ public class RestApiController {
             throw new UsernameExistException("User with username exist");
         }
     }
-
 
     @GetMapping("users/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") long id) {
